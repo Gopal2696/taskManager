@@ -9,5 +9,12 @@ module.exports = {
             "destructuring": "any",
             "ignoreReadBeforeAssign": false
         }]
+    },
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "parser": "babel-eslint",
+    "env": {
+        "es6": true
     }
   };
