@@ -17,7 +17,6 @@ router.post('/tasks', auth, async (req,res)=>{
 })
 
 router.get('/tasks',auth , async (req,res)=>{
-    console.log(req.user)
     const match = {}
     if (req.query.completed){
         match.completed = req.query.completed === 'true'
@@ -27,12 +26,11 @@ router.get('/tasks',auth , async (req,res)=>{
             path: 'tasks', 
             match,
             options : {
-                limit : req.query.limit, 
-                skip : req.query.skip
+                limit : parseInt(req.query.limit), 
+                skip : parseInt(req.query.skip)
             } 
         }).execPopulate()
-        console.log(task)
-        res.send(task)
+        res.send(req.user.tasks)
     }catch(e){
         res.status(500).send(e)
     }
