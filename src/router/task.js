@@ -61,14 +61,12 @@ router.patch("/tasks/:id", auth, async (req, res) => {
         res.status(400).send({ error: "invaild update!" });
     }
     const _id = req.params.id;
-    console.log(_id);
     try {
         const task = await Task.findOne({ _id, owner: req.user._id });
         console.log(task);
         if (!task) {
             res.status(404).send();
         }
-        // findByIdAndUpdate bypasses the .save method
         updatemethod.forEach((element) => (task[element] = req.body[element]));
         await task.save();
 
